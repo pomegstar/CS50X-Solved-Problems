@@ -1,0 +1,8 @@
+Reflection of the question number 1:
+After analizing data we see that the average energy of music is 0.659, average valence of music is 0.484
+and average danceability of music is 0.716. So we can say that the user listens to both happy and sad music and
+the user's Aura Hue is blue.
+
+Reflection of the question number 2:
+A better way to calculate this Aura would be to use more data from what the user is listening to.
+
