@@ -1,0 +1,49 @@
+header>h1{
+    text-align: center;
+    padding:50px;
+    background-color:purple;
+    color:white;
+}
+
+h2{
+    margin: 10px;
+    padding-left:20px;
+}
+
+.p{
+    margin:20px;
+    padding:20px;
+    border: 2px solid #dfe1e5;
+    border-radius: 15px;
+    box-shadow: 0 5px 16px 2px rgba(32,33,36,.28);
+    border-color: rgba(223,225,229,0);
+    display:flex;
+    flex-direction:column;
+}
+
+a{
+    text-decoration:none;
+    color:black;
+}
+
+a:hover{
+    text-decoration:underline;
+}
+
+#bd{
+    margin:20px;
+    padding:8px;
+    border: 2px solid #dfe1e5;
+    border-radius: 25px;
+    box-shadow: 0 2px 20px 6px rgba(32,33,36,.28);
+    border-color: rgba(223,225,229,0);
+    display:flex;
+    flex-direction:column;
+}
+
+#f{
+    margin-top:20px;
+    background-color:green;
+    border:none;
+    color:white;
+}
