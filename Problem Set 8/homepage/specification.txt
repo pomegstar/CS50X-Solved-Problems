@@ -1,0 +1,39 @@
+# Ten+ HTML tags:
+----------------
+1.<header>
+2.<h1>
+3.<h2>
+4.<p>
+5.<div>
+6.<i>
+7.<ul>
+8.<li>
+9.<a>
+10.<hr>
+11.<b>
+12.<span>
+13.<link>
+14.<script>
+...
+
+# Five+ CSS properties:
+-----------------
+1.margin
+2.padding
+3.border
+4.border-radius
+5.box-shadow
+6.border-color
+7.display
+8.background-color
+...
+
+# Brief description of Bootstrap uses:
+--------------------------------------
+I have used bootstrap for creating navigator bar.
+
+
+# Brief description of JavaScript uses:
+---------------------------------------
+I have used JavaScript to add alerts.
+
