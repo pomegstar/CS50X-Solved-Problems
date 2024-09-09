@@ -1,0 +1,134 @@
+.header {
+    background-image: url('bgf.jpg'); /* Replace with your image path */
+    background-size: cover; /* This makes sure the image covers the entire element */
+    background-position: center; /* Centers the image */
+    background-repeat: no-repeat; /* Prevents the image from repeating */
+    height: 400px; /* Adjust the height as needed */
+    text-align: center; /* Centers the text horizontally */
+    color: white; /* If needed, change the text color to ensure visibility */
+}
+
+* {
+    box-sizing: border-box;
+}
+
+body {
+    margin: 0;
+    font-family: Arial, sans-serif;
+    background-color: #dddddd;
+}
+
+#h1s {
+    padding-top: 100px;
+    font-size: 50px;
+    color: white;
+}
+
+.contin {
+    border: 2px solid #dfe1e5;
+    border-radius: 7px;
+    text-align: center;
+    padding: 20px;
+    display: flex;
+    flex-direction: column;
+    height: auto;
+    width: 550px;
+    margin: 20px auto;
+    background-color: white;
+}
+
+.hos {
+    padding: 20px;
+    border: 2px solid #dfe1e5;
+    border-radius: 7px;
+    box-shadow: 0 2px 6px rgba(32, 33, 36, .28);
+    background-color: white;
+    display: flex;
+    flex-direction: column;
+    height: auto;
+    width: auto;
+    margin: 20px;
+
+}
+
+.img {
+    padding-top: 10px;
+}
+
+.h1 {
+    padding-top: 15px;
+    font-weight: bold;
+}
+
+.h2 {
+    padding-top: 15px;
+    text-align:center;
+}
+
+
+
+a {
+    color: black;
+    text-decoration: none;
+}
+
+.form-control {
+    background-color: #dfe1e5;
+}
+
+
+
+#btnap,
+#btn-edtp {
+    background-color: #a52eff;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    margin-top: 15px;
+    padding: 10px;
+}
+
+.steps-section {
+    padding: 10px 0;
+}
+
+.steps-section h2 {
+    margin-bottom: 30px;
+}
+
+.step {
+    text-align: center;
+    padding: 20px;
+}
+
+.step i {
+    font-size: 3rem;
+    color: #0d6efd;
+    margin-bottom: 20px;
+}
+
+.step h4 {
+    font-size: 1.5rem;
+    margin-bottom: 15px;
+}
+
+.step p {
+    font-size: 1rem;
+    color: #6c757d;
+}
+
+@media (max-width: 767.98px) {
+    .navbar-dark {
+        padding: 15px;
+    }
+
+    .navbar-toggler {
+        border: none;
+        padding: 0;
+    }
+
+    .navbar-toggler:focus {
+        outline: none;
+        box-shadow: none;
+    }
+}

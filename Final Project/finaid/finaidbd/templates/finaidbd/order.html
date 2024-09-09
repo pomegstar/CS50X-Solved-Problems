@@ -1,0 +1,37 @@
+{% extends "finaidbd/layout.html" %}
+
+{% block body %}
+{% if mssage %}
+        <div class="alert alert-success">
+            <p>{{ mssage }}</p>
+        </div>
+{% endif %}
+
+ <h2 style="font-weight:bold; text-align:center; margin-top: 15px;">Make an Order</h2>
+    <div class="contin">
+    <form action="{% url 'order' %}" method="post">
+        {% csrf_token %}
+        <div class="mb-3">
+            <label>What would you like to purchase? <br>(Please specify the name of the product <br>along with the company or brand name)</label>
+            <input class="form-control mx-auto w-auto" autofocus type="text" name="product" placeholder="Product Name" required>
+        </div>
+        <div class="mb-3">
+            <label>Under whose reference would<br> you like to purchase?<br> Choose a dealer: </label>
+            <select class='form-control mx-auto w-auto' name='dealer' required>
+                {% for dealer in dealers %}
+                    <option  value="{{ dealer.id }}">{{ dealer.name }}</option>
+                {% endfor %}
+            </select>
+        </div>
+        <div class="mb-3">
+            <label>How much can you pay monthly?</label>
+            <input class="form-control mx-auto w-auto" type="number" name="installment" placeholder="Quantity of Monthly Pay" min=1 required>
+        </div>
+        <div class="mb-3">
+            <label>What is the maximum price<br> you are willing to pay?</label>
+            <input class="form-control mx-auto w-auto" type="number" name="maximum" placeholder="Maximum Price" min=1 required>
+        </div>
+        <input class="btn btn-primary" type="submit" value="Request an Order">
+    </form>
+</div>
+{% endblock %}

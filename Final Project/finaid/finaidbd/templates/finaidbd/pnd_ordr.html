@@ -1,0 +1,32 @@
+{% extends "finaidbd/layout.html" %}
+
+{% block body %}
+
+<h2 style="font-weight:bold; margin-top:15px; text-align:center;">Pending Orders</h2>
+        {% for p_order in p_orders %}
+    <div class="contin">
+        <p>Order No: {{ p_order.id }}</p>
+        <p>Ordered by: {{ p_order.ordered_by }}</p>
+        <p>Product Name: {{ p_order.product }}</p>
+        <p>Referenced by: {{ p_order.referenced_by.name }}</p>
+        <p>Order Time: {{ p_order.time }}</p>
+        <p>Maximum Price: {{ p_order.maxim_price }} tk</p>
+        <p>Amount of monthly pay installment: {{ p_order.monthly_pay }} tk</p>
+    <form action="{% url 'pnd_ordr' %}" method="post">
+        {% csrf_token %}
+        <input type="hidden" name="prdr_id" value="{{ p_order.id }}">
+        <div class="mb-3">
+            <input class="form-control mx-auto w-auto" autofocus type="number" name="fprice" placeholder="Final Price" min=1 required>
+        </div>
+        <div class="mb-3">
+            <input class="form-control mx-auto w-auto" type="number" name="finst" placeholder="Final Installment" min=1 required>
+        </div>
+        <input class="btn btn-primary" type="submit" id="cbtn" value="Confirm">
+    </form>
+</div>
+{% empty %}
+<div class="contin">
+<h5>No pending order yet.</h5>
+</div>
+{% endfor %}
+{% endblock %}

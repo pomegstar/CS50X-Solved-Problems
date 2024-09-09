@@ -1,0 +1,48 @@
+{% extends "finaidbd/layout.html" %}
+
+{% block body %}
+
+<h2 style="font-weight:bold; margin-top:15px; text-align:center;">Pending Installments</h2>
+    <div style="padding:10px; margin:10px;">
+        <table class="table table-bordered table-hover table striped">
+            <thead class="thead-light">
+                <tr style="text-align:center;">
+                    <th>Order No</th>
+                    <th>Ordered by</th>
+                    <th>Products</th>
+                    <th>paid</th>
+                    <th>Time</th>
+                    <th>Final Price</th>
+                    <th>Due</th>
+                    <th>Status</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for p_order in p_insts %}
+                <tr style="text-align:center;">
+                    <td>{{ p_order.orderer.id }}</td>
+                    <td>{{ p_order.orderer.ordered_by }}</td>
+                    <td>{{ p_order.orderer.product }}</td>
+                    <td>{{ p_order.paid }} tk</td>
+                    <td>{{ p_order.datetime }}</td>
+                    <td>{{ p_order.orderer.final_price }} tk</td>
+                    <td>{{ p_order.orderer.due }} tk</td>
+                    <td>
+                        <p>Pending...</p>
+                        <form action="{% url 'pnd_inst' %}" method="post">
+                            {% csrf_token %}
+                            <input type="hidden" name="prdr_id" value="{{ p_order.id }}">
+                            <input type="hidden" name="pend_i" value="True">
+                            <input class="btn btn-primary" type="submit" id="cbtn" value="Accept">
+                        </form>
+                    </td>
+                </tr>
+                {% empty %}
+                <tr>
+                    <td style="text-align:center;" colspan="8">No pending installment yet.</td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+{% endfor %}
+{% endblock %}

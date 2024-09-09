@@ -1,0 +1,29 @@
+{% extends "finaidbd/layout.html" %}
+
+{% block body %}
+{% if mssage %}
+        <div class="alert alert-success">
+            <p>{{ mssage }}</p>
+        </div>
+{% endif %}
+
+ <h2 style="font-weight:bold; text-align:center; margin-top: 15px;">Pay Installment</h2>
+    <div class="contin">
+    <form action="{% url 'pay_inst' %}" method="post">
+        {% csrf_token %}
+        <div class="mb-3">
+            <label>Choose an order no: </label>
+            <select class='form-control mx-auto w-auto' name='ordr_no' required>
+                {% for dealer in orders %}
+                    <option  value="{{ dealer.id }}">Order No: {{ dealer.id }}, Due: {{ dealer.due }} tk</option>
+                {% endfor %}
+            </select>
+        </div>
+        <div class="mb-3">
+            <label>How much do you want to pay as installment? </label>
+            <input class="form-control mx-auto w-auto" type="number" name="installment" placeholder="Set an Amount" min=1 required>
+        </div>
+        <input class="btn btn-primary" type="submit" value="Pay">
+    </form>
+</div>
+{% endblock %}

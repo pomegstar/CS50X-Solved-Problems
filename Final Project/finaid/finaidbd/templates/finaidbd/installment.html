@@ -1,0 +1,93 @@
+{% extends "finaidbd/layout.html" %}
+
+{% block body %}
+        {% if not user.is_superuser %}
+            {% if mssage %}
+            <div class="alert alert-success">
+                <p>{{ mssage }}</p>
+            </div>
+            {% endif %}
+
+            {% if not order.is_complete and order.is_accept %}
+                <div class="contin">
+                    <h3><b>Pay Installment</b></h3><hr>
+                    <form action="{% url 'installment' order.id %}" method="post">
+                        {% csrf_token %}
+                        <div class="mb-3">
+                            <label>How much do you want to pay as installment?</label>
+                            <input class="form-control mx-auto w-auto" autofocus type="number" name="inst_pay" placeholder="Set an Amount" min=1 required>
+                        </div>
+                        <input class="btn btn-primary" type="submit" value="Pay">
+                    </form>
+                </div>
+            {% endif %}
+        {% endif %}
+
+                <div style="padding:10px; margin:10px;">
+                <h1 class="h1" style="text-align: center;">Installments of Order No: {{ order.id }}</h1>
+                <table class="table table-bordered table striped">
+                    <tbody>
+                        <tr>
+                            <th style="text-align:right;">Ordered by: </th>
+                            <td>{{ order.ordered_by }}</td>
+                        </tr>
+                        <tr>
+                            <th style="text-align:right;">Products: </th>
+                            <td>{{ order.product }}</td>
+                        </tr>
+                        <tr>
+                            <th style="text-align:right;">Final Price: </th>
+                            <td>{{ order.final_price }} tk</td>
+                        </tr>
+                        <tr>
+                            <th style="text-align:right;">Due: </th>
+                            <td>{{ order.due }} tk</td>
+                        </tr>
+                        <tr>
+                            <th style="text-align:right;">Monthly Installment: </th>
+                            <td>{{ order.mnthpay_final }} tk</td>
+                        </tr>
+                    </tbody>
+                    </table>
+
+                    <table class="table table-bordered table striped">
+                        <tr class="thead-light" style="text-align:center;">
+                            <th>Paid</th>
+                            <th>Time</th>
+                            <th>Status</th>
+                        </tr>
+
+                    <tbody>
+                        {% for inst in installments %}
+                        <tr style="text-align:center;">
+
+                            <td>{{ inst.paid }} tk</td>
+                            <td>{{ inst.datetime }}</td>
+                            <td>
+                                {% if inst.is_accepted %}
+                                    Accepted
+                                {% else %}
+                                    Pending...
+                                    {% if user.is_superuser %}
+                                        <form action="{% url 'pnd_inst' %}" method="post">
+                                            {% csrf_token %}
+                                            <input type="hidden" name="prdr_id" value="{{ inst.id }}">
+                                            <input type="hidden" name="pend_i" value="False">
+                                            <input class="btn btn-primary" type="submit" id="cbtn" value="Accept">
+                                        </form>
+                                    {% endif %}
+                                {% endif %}
+                            </td>
+
+                        </tr>
+                        {% empty %}
+                        <tr>
+                            <td style="text-align:center;" colspan="3">No installment paid yet.</td>
+                        </tr>
+                        {% endfor %}
+
+                    </tbody>
+                </table>
+            </div>
+
+{% endblock %}

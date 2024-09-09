@@ -1,0 +1,167 @@
+{% extends "finaidbd/layout.html" %}
+
+{% block body %}
+
+    {% if user.is_authenticated %}
+        {% if user.is_superuser %}
+                <div style="padding:10px; margin:10px;">
+                <h1 class="h1" style="text-align: center;">{{ heading }} Orders</h1>
+                <table class="table table-bordered table-hover table striped">
+                    <thead class="thead-light">
+                        <tr style="text-align:center;">
+                            <th>Order No</th>
+                            <th>Ordered by</th>
+                            <th>Products</th>
+                            <th>Referenced by</th>
+                            <th>Time</th>
+                            <th>Final Price</th>
+                            <th>Due</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        {% for order in orders %}
+                        <tr style="text-align:center;" onclick="window.location.href=`{% url 'installment' order.id %}`">
+                            <td>{{ order.id }}</td>
+                            <td>{{ order.ordered_by }}</td>
+                            <td>{{ order.product }}</td>
+                            <td>{{ order.referenced_by.name }}</td>
+                            <td>{{ order.time }}</td>
+                            <td>{{ order.final_price }} tk</td>
+                            <td>{{ order.due }} tk</td>
+                        </tr>
+                        {% empty %}
+                        <tr>
+                            <td style="text-align:center;" colspan="7">No {{ heading }} Orders Yet</td>
+                        </tr>
+                        {% endfor %}
+                    </tbody>
+                </table>
+            </div>
+        {% else %}
+            <div style="padding:10px; margin:10px;">
+                <h1 class="h1" style="text-align: center;">My {{ heading_gu }}</h1>
+                <table class="table table-bordered table-hover table striped">
+                    <thead class="thead-light">
+                        <tr style="text-align:center;">
+                            <th>Order No</th>
+                            <th>Products</th>
+                            <th>Referenced by</th>
+                            <th>Time</th>
+                            <th>Final Price</th>
+                            <th>Due</th>
+                            <th>Status</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        {% for order in p_orders %}
+                        <tr style="text-align:center;" onclick="window.location.href=`{% url 'installment' order.id %}`">
+                            <td>{{ order.id }}</td>
+                            <td>{{ order.product }}</td>
+                            <td>{{ order.referenced_by.name }}</td>
+                            <td>{{ order.time }}</td>
+                            <td>{{ order.final_price }} tk</td>
+                            <td>{{ order.due }} tk</td>
+                            <td>
+                                {% if order.is_accept %}
+                                    Accepted
+                                {% else %}
+                                    Pending...
+                                {% endif %}
+                            </td>
+                        </tr>
+                        {% empty %}
+                        <tr>
+                            <td style="text-align:center;" colspan="7">No {{ heading_gu }} Yet.</td>
+                        </tr>
+                        {% endfor %}
+                    </tbody>
+                </table>
+            </div>
+        {% endif %}
+
+    {% else %}
+        <div class="header">
+            <h1 id="h1s" style="font-weight: bold;">Welcome to FinAid</h1>
+            <p style="font-size: 1.5rem;">Buy your dream with convenient installment package</p>
+            <a href="{% url 'register' %}"><button style="margin-top:10px" class="btn btn-warning">Sign-up Now</button></a>
+        </div>
+        <div class="container my-5">
+            <div class="row text-center">
+                <div class="col-md-4">
+                    <i class="bi bi-cart" style="font-size: 3rem; color: #0d6efd;"></i>
+                    <h3 class="mt-3">Convenient Ordering</h3>
+                    <p>Order luxury products with just a few clicks.</p>
+                </div>
+                <div class="col-md-4">
+                    <i class="bi bi-credit-card" style="font-size: 3rem; color: #0d6efd;"></i>
+                    <h3 class="mt-3">Flexible Installments</h3>
+                    <p>Break down large payments into manageable installments.</p>
+                </div>
+                <div class="col-md-4">
+                    <i class="bi bi-shield-check" style="font-size: 3rem; color: #0d6efd;"></i>
+                    <h3 class="mt-3">Installment Tracking</h3>
+                    <p>Track your payment progress in your dashboard.</p>
+                </div>
+            </div>
+        </div>
+
+        <div class="steps-section">
+            <div class="container">
+                <h2 class="text-center">Get Started in 3 Easy Steps</h2>
+                <div class="row">
+                    <div class="col-md-4 step">
+                        <i class="bi bi-person-plus"></i>
+                        <h4>1. Sign Up</h4>
+                        <p>Create a free account to get started with FinAid.</p>
+                    </div>
+                    <div class="col-md-4 step">
+                        <i class="bi bi-basket"></i>
+                        <h4>2. Order a Product</h4>
+                        <p>Order a product and set the installment plan that fits your budget.</p>
+                    </div>
+                    <div class="col-md-4 step">
+                        <i class="bi bi-calendar-check"></i>
+                        <h4>3. Pay Over Time</h4>
+                        <p>Pay in easy installments at your convenience.</p>
+                    </div>
+                    <div style="margin-bottom:10px; text-align:center;">
+                        <a href="{% url 'register' %}"><button class="btn btn-warning">Sign-up Now</button></a>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="py-4">
+            <div class="container">
+                <h2 class="text-center mb-5">What Our Users Say</h2>
+                <div class="row">
+                    <div class="col-md-6">
+                        <div class="card mb-4">
+                            <div class="card-body">
+                                <p class="card-text">"FinAid allowed me to buy my dream car with an installment plan that worked perfectly for my budget!"</p>
+                                <h5 class="card-title">- Alex Johnson</h5>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-6">
+                        <div class="card mb-4">
+                            <div class="card-body">
+                                <p class="card-text">"Thanks to FinAid, I was able to invest in a new property without stressing about upfront payments."</p>
+                                <h5 class="card-title">- Sarah Lee</h5>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <footer>
+            <div class="container text-center" style="margin-top:25px">
+                <a href="{% url 'register' %}"><button style="margin:10px" class="btn btn-warning">Sign-up Now</button></a>
+                <p>&copy; 2024 FinAid. All rights reserved.</p>
+            </div>
+        </footer>
+
+    {% endif %}
+
+{% endblock %}
